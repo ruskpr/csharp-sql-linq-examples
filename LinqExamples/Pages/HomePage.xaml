@@ -84,10 +84,13 @@
                    Grid.RowSpan="2"
                    Padding="20,10,0,0"
                    Foreground="White"
-                   Text="https://github.com/ruskpr/csharp-sql-linq-examples"
+                   Text=""
                    FontWeight="Light"
                    FontSize="15"
-                   TextWrapping="WrapWithOverflow" />
+                   TextWrapping="WrapWithOverflow">
+            <Hyperlink Foreground="White" RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://github.com/ruskpr/csharp-sql-linq-examples">
+                github.com/ruskpr/csharp-sql-linq-examples</Hyperlink>
+        </TextBlock>
 
         
     </Grid>
