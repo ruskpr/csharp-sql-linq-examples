@@ -19,7 +19,7 @@ public DataTable GetProductByPriceRange(decimal min, decimal max)
 
 - And this is what it looks like in the application:
 
-![plot](https://github.com/ruskpr/csharp-sql-linq-examples/blob/main/Images/example-query.png)
+<img src="https://github.com/ruskpr/csharp-sql-linq-examples/blob/main/Images/example-query.png" data-canonical-src="https://github.com/ruskpr/csharp-sql-linq-examples/blob/main/Images/example-query.png" width="600" height="400" />
 
 ## Setup
 
