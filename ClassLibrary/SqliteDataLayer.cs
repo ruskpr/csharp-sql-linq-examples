@@ -1,22 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SQLite;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ClassLibrary.SqlServer
+namespace ClassLibrary
 {
-    public class SqlServerDataLayer : INorthwindDataLayer
+    public class SqliteDataLayer : INorthwindDataLayer
     {
-        // TODO: Target your SQL Server instance (if you plan to use SQL Server)
-        public static string DEFAULT_CONN_STRING = "server=localhost;database=Northwind;user id=sa;password=P@ssword!;encrypt=false";
+        public static string DEFAULT_CONN_STRING = $"Data source={Path.Combine(Environment.CurrentDirectory, "nw.db")}";
 
         string connectionString = "";
 
-        public SqlServerDataLayer(string connectionString)
+        public SqliteDataLayer(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
-        #region Select * from [table] queries
+        #region SELECT * datatable methods
+        public DataTable GetOrdersTable()
+        {
+            return GetDataTableFromQuery("SELECT * FROM Orders");
+        }
         public DataTable GetCategoriesTable()
         {
             return GetDataTableFromQuery("SELECT * FROM Categories");
@@ -30,15 +39,11 @@ namespace ClassLibrary.SqlServer
         public DataTable GetEmployeesTable()
         {
             return GetDataTableFromQuery("SELECT * FROM Employees");
-
         }
+
         public DataTable GetOrderDetailsTable()
         {
             return GetDataTableFromQuery("SELECT * FROM [Order Details]");
-        }
-        public DataTable GetOrdersTable()
-        {
-            return GetDataTableFromQuery("SELECT * FROM Orders");
         }
 
         public DataTable GetProductsTable()
@@ -73,16 +78,18 @@ namespace ClassLibrary.SqlServer
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand(qry, conn);
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    SQLiteCommand cmd = new SQLiteCommand(qry, conn);
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                     adapter.Fill(dt);
                 }
             }
-            catch
+            catch (SQLiteException e)
             {
-                return null;
+                Debug.WriteLine(e.Message);
+                throw;
+                //return null;
             }
 
             return dt;

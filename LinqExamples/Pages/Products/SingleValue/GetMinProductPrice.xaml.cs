@@ -1,5 +1,4 @@
-﻿using ClassLibrary.Sqlite;
-using ClassLibrary;
+﻿using ClassLibrary;
 using System.Windows;
 using System.Windows.Controls;
 

@@ -1,5 +1,4 @@
 ﻿using ClassLibrary;
-using ClassLibrary.Sqlite;
 using System.Windows.Controls;
 
 namespace LinqExamples.Pages.Products.DataTable
