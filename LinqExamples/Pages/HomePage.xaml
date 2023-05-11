@@ -1,0 +1,94 @@
+﻿<Page x:Class="LinqExamples.pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LinqExamples.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="800"
+      Title="HomePage">
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--MAIN HEADER-->
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="4"
+                   Grid.RowSpan="2"
+                   Padding="40"
+                   Foreground="White"
+                   Text="Northwind Database LINQ Queries"
+                   FontWeight="Bold"
+                   FontSize="55"
+                   TextWrapping="WrapWithOverflow" />
+
+        <!--CONTENT-->
+        <StackPanel Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="5"
+                    Grid.RowSpan="3"
+                    Margin="40,0,40,0">
+            
+
+            <!--NOTES HEADER-->
+            <TextBlock Padding="5" Foreground="White"
+                       Text="Notes:"
+                       FontWeight="Bold"
+                       FontSize="25"
+                       TextWrapping="WrapWithOverflow" />
+            
+            <!--NOTE 1-->
+            <TextBlock Padding="5" Foreground="White"
+                       Text="-You can use the navigation tree on the left to use the different queries."
+                       FontWeight="Light"
+                       FontSize="25"
+                       TextWrapping="WrapWithOverflow" />
+            
+            <!--NOTE 2-->
+            <TextBlock Padding="5" Foreground="White"
+                       Text="-All query data is pulled from the 'nw.db' file located inside of the project directory."
+                       FontWeight="Light"
+                       FontSize="25"
+                       TextWrapping="WrapWithOverflow" />
+
+            <!--NOTE 3-->
+            <TextBlock Padding="5" Foreground="White"
+                       Text="-All the LINQ queries that are being used in this app can be found inside of the SqlBusinessLayer.cs file."
+                       FontWeight="Light"
+                       FontSize="25"
+                       TextWrapping="WrapWithOverflow" />
+
+        </StackPanel>
+        
+
+        <!--FOOTER TEXT-->
+        <TextBlock Grid.Row="5"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="5"
+                   Grid.RowSpan="2"
+                   Padding="20,10,0,0"
+                   Foreground="White"
+                   Text="https://github.com/ruskpr/csharp-sql-linq-examples"
+                   FontWeight="Light"
+                   FontSize="15"
+                   TextWrapping="WrapWithOverflow" />
+
+        
+    </Grid>
+</Page>

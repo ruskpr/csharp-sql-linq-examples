@@ -1,0 +1,96 @@
+﻿<Page x:Class="LinqExamples.Pages.Orders.SingleValue.GetOrdersShippedByShipperCount"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:LinqExamples.Pages.Orders.SingleValue"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GetOrdersShippedByShipperCount">
+
+    <Grid>
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+
+        <!--UPPER CONTENT-->
+        <StackPanel Grid.Column="1"
+                    Grid.ColumnSpan="3">
+
+            <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                       Foreground="White"
+                       Text="Get Orders Shipped By Shipper Count" />
+            <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                       Foreground="White"
+                       Text="Enter a shipper ID to see the number of orders shipped by a shipper" />
+
+            <!--text inputs-->
+            <DockPanel Margin="20">
+                <TextBox x:Name="tbInput"
+                     Foreground="White"
+                     IsReadOnly="False"
+                     materialDesign:HintAssist.HelperText="Enter a shipper ID here (ex. 2)"
+                     materialDesign:HintAssist.Hint=""
+                     TextChanged="tbInput_TextChanged"
+                     Margin="5"
+                     Width="150"
+                     HorizontalAlignment="Left">
+                    <TextBox.Text>
+                        <Binding Path="Name"
+                             UpdateSourceTrigger="PropertyChanged">
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Content="Orders Shipped: "
+                       VerticalAlignment="Bottom"
+                       Margin="20,0,0,0"></Label>
+                <TextBox x:Name="tbReturnValue"
+                     Foreground="White"
+                     IsReadOnly="True"
+                     materialDesign:HintAssist.HelperText=""
+                     materialDesign:HintAssist.Hint=""
+                     Margin="5"
+                     Width="150"
+                     HorizontalAlignment="Left">
+                    <TextBox.Text>
+                        <Binding Path="Name"
+                             UpdateSourceTrigger="PropertyChanged">
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+            </DockPanel>
+
+
+            <TextBlock x:Name="lbErrorMsg" Foreground="Red"
+                       Text=""
+                       Margin="0,20,0,0"
+                Style="{StaticResource MaterialDesignButtonTextBlock}"
+                        />
+        </StackPanel>
+
+        <DataGrid x:Name="dgData"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="3"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="True"
+                  SelectionMode="Extended"
+                  SelectionUnit="Cell" />
+
+    </Grid>
+</Page>

@@ -1,0 +1,95 @@
+﻿<Page x:Class="LinqExamples.Pages.Custom.GetInventoryValueByProductName"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:LinqExamples.Pages.Custom"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GetInventoryValueByProductName">
+
+    <Grid>
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+
+        <!--UPPER CONTENT-->
+        <StackPanel Grid.Column="1"
+                    Grid.ColumnSpan="3">
+
+            <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                       Foreground="White"
+                       Text="Get Inventory Value By Product Name" />
+            <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                       Foreground="White"
+                       Text="Type in the input below to find items in the Products table" />
+
+            <DockPanel>
+                <TextBox x:Name="tbProductName"
+                         Foreground="White"
+                         TextChanged="NameTextBox_TextChanged"
+                         materialDesign:HintAssist.HelperText="Enter a value (ex. chai)"
+                         materialDesign:HintAssist.Hint="Product Name"
+                         Margin="5"
+                         Width="200"
+                         HorizontalAlignment="Left">
+                    <TextBox.Text>
+                        <Binding Path="Name"
+                                 UpdateSourceTrigger="PropertyChanged">
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Content="Inventory value:"
+                       VerticalAlignment="Center"
+                       Margin="20,0,0,0"></Label>
+                
+                <TextBox x:Name="tbOutput"
+                         Foreground="White"
+                         IsReadOnly="True"
+                         TextChanged="NameTextBox_TextChanged"
+                         materialDesign:HintAssist.HelperText=""
+                         materialDesign:HintAssist.Hint=""
+                         Margin="5"
+                         Width="200"
+                         HorizontalAlignment="Left">
+                    <TextBox.Text>
+                        <Binding Path="Name"
+                                 UpdateSourceTrigger="PropertyChanged">
+
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+            </DockPanel>
+            <TextBlock x:Name="lbErrorMsg"
+                       Foreground="Red"
+                       Text=""
+                       Margin="0,20,0,0"
+                       Style="{StaticResource MaterialDesignButtonTextBlock}" />
+        </StackPanel>
+
+        <DataGrid x:Name="dgData"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="3"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="True"
+                  SelectionMode="Extended"
+                  SelectionUnit="Cell" />
+
+    </Grid>
+</Page>
