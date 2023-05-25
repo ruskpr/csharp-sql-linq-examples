@@ -4,7 +4,7 @@ This is a WPF (Windows Presentation Foundation) application that demonstrates th
 
 LINQ is a powerful query language that provides a unified syntax for querying and manipulating data from different data sources.
 
-- Here is an example of a query that is used in codebase:
+- Here is an example of a query that is used in the codebase:
 
 ```csharp
 public DataTable GetProductByPriceRange(decimal min, decimal max)
