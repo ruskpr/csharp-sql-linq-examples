@@ -210,7 +210,7 @@
                     </TreeViewItem>
                 </TreeViewItem>
                 <!--SINGLE ITEM QUERIES DROPDOWN-->
-                <TreeViewItem Header="Custom Methods">
+                <TreeViewItem Header="Custom Queries">
                     <TreeViewItem Header="GetInventoryValueByProductName"
                                   Tag="Custom/GetInventoryValueByProductName"
                                   MouseLeftButtonUp="TreeViewItem_MouseLeftButtonUp" />
