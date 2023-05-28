@@ -7,9 +7,6 @@ namespace ClassLibrary
 {
     public class SqlBusinessLayer<T> where T : INorthwindDataLayer
     {
-        // this class takes a generic type with the constraint being
-        // that the class must implement the 'INorthwindDataLayer' interface
-
         private INorthwindDataLayer dataLayer;
 
         public SqlBusinessLayer(string connString)
@@ -29,29 +26,26 @@ namespace ClassLibrary
             }
         }
 
-        public DataTable GetProductThatNameContains(string productName)//
+        public DataTable GetProductThatNameContains(string productName)
         {
             EnumerableRowCollection<DataRow> query = dataLayer.GetProductsTable()
                 .AsEnumerable()
                 .Where(p => p.Field<string>("ProductName").ToLower().Contains(productName.ToLower()));
 
-            // convert Enumerable to Datatable
             return query.Count() > 0 ? query.CopyToDataTable() : null;
         }
 
-        public DataTable GetProductByName(string productName)//
+        public DataTable GetProductByName(string productName)
         {
             EnumerableRowCollection<DataRow> query = dataLayer.GetProductsTable()
                 .AsEnumerable()
                 .Where(p => p.Field<string>("ProductName").ToLower() == productName.ToLower());
 
-            // convert Enumerable to Datatable
             return query.Count() > 0 ? query.CopyToDataTable() : null;
         }
 
-        public DataTable GetEmployeeIDFromOrderID(int orderId)//
+        public DataTable GetEmployeeIDFromOrderID(int orderId)
         {
-            // get employeeID from orders table
             int employeeId;
             try
             {
@@ -66,7 +60,6 @@ namespace ClassLibrary
                 return null;
             }
 
-            // get employee record using employeeID we got from query above
             var query = dataLayer.GetEmployeesTable()
                 .AsEnumerable()
                 .Where(employee => employee.Field<long>("EmployeeID") == employeeId);
@@ -75,22 +68,19 @@ namespace ClassLibrary
         }
 
 
-        #region Interpret the method name and return all fields as a DataTable for the requested record(s)
-
-        public DataTable GetCustomerByName(string customerName)//
+        public DataTable GetCustomerByName(string customerName)
         {
             EnumerableRowCollection<DataRow> query = dataLayer.GetCustomersTable()
                 .AsEnumerable()
                 .Where(p => p.Field<string>("CompanyName").ToLower() == customerName.ToLower());
 
-            // convert Enumerable to datatable
             if (query.Count() > 0)
                 return query.CopyToDataTable();
             else
                 return null;
         }
 
-        public DataTable GetProductsByCategoryName(string categoryName)//
+        public DataTable GetProductsByCategoryName(string categoryName)
         {
             long categoryId;
             try
@@ -111,11 +101,10 @@ namespace ClassLibrary
                  .AsEnumerable()
                  .Where(product => product.Field<int>("CategoryID") == categoryId);
 
-            // convert Enumerable to datatable
             return query.Count() > 0 ? query.CopyToDataTable() : null;
         }
 
-        public DataTable GetCustomerByCountry(string country)//
+        public DataTable GetCustomerByCountry(string country)
         {
             var query = dataLayer.GetCustomersTable().AsEnumerable().
                 Where(customer => customer.Field<string>("Country").ToLower() == country.ToLower());
@@ -123,7 +112,7 @@ namespace ClassLibrary
             return query.Count() > 0 ? query.CopyToDataTable() : null;
         }
 
-        public DataTable GetOrdersByCustomerID(string customerId)//
+        public DataTable GetOrdersByCustomerID(string customerId)
         {
             var query = dataLayer.GetOrdersTable().AsEnumerable().
                 Where(order => order.Field<string>("CustomerID").ToLower() == customerId.ToLower());
@@ -137,9 +126,9 @@ namespace ClassLibrary
                 Where(orderDetail => orderDetail.Field<int>("OrderID") == orderId);
 
             return query.Count() > 0 ? query.CopyToDataTable() : null;
-        }//
+        }
 
-        public DataTable GetOrdersByEmployeeID(int employeeId)//
+        public DataTable GetOrdersByEmployeeID(int employeeId)
         {
             var query = dataLayer.GetOrdersTable().AsEnumerable().
                 Where(order => order.Field<int>("EmployeeID") == employeeId);
@@ -147,7 +136,7 @@ namespace ClassLibrary
             return query.Count() > 0 ? query.CopyToDataTable() : null;
         }
 
-        public DataTable GetProductByPriceRange(decimal min, decimal max)//
+        public DataTable GetProductByPriceRange(decimal min, decimal max)
         {
             var query = dataLayer.GetProductsTable().AsEnumerable().
                 Where(product => product.Field<decimal>("UnitPrice") > min &&
@@ -162,10 +151,8 @@ namespace ClassLibrary
                 Where(supplier => supplier.Field<string>("CompanyName").ToLower() == companyName.ToLower());
 
             return query.Count() > 0 ? query.CopyToDataTable() : null;
-        }//
-        #endregion
+        }
 
-        #region Interpret the method name and return a single value of appropriate data type for the requested record(s):
         public DateTime GetShipDateFromOrder(int orderId)
         {
             DateTime shipDate = dataLayer.GetOrdersTable().AsEnumerable()
@@ -174,9 +161,9 @@ namespace ClassLibrary
                 .FirstOrDefault();
 
             return shipDate;
-        }//
+        }
 
-        public decimal GetMaxProductPrice()//
+        public decimal GetMaxProductPrice()
         {
             var maxPrice = dataLayer.GetProductsTable().AsEnumerable()
                 .MaxBy(price => price.Field<decimal>("UnitPrice"));
@@ -184,7 +171,7 @@ namespace ClassLibrary
             return maxPrice.Field<decimal>("UnitPrice");
         }
 
-        public decimal GetMinProductPrice()//
+        public decimal GetMinProductPrice()
         {
             var minPrice = dataLayer.GetProductsTable().AsEnumerable()
                 .MinBy(price => price.Field<decimal>("UnitPrice"));
@@ -192,7 +179,7 @@ namespace ClassLibrary
             return minPrice.Field<decimal>("UnitPrice");
         }
 
-        public int GetOrdersShippedByShipperCount(int shipperId)//
+        public int GetOrdersShippedByShipperCount(int shipperId)
         {
             int ordersShipped = dataLayer.GetOrdersTable().AsEnumerable()
                 .Where(id => id.Field<int>("ShipVia") == shipperId)
@@ -201,7 +188,7 @@ namespace ClassLibrary
             return ordersShipped;
         }
 
-        public decimal GetProductPriceByName(string productName)//
+        public decimal GetProductPriceByName(string productName)
         {
             var price = dataLayer.GetProductsTable().AsEnumerable()
                 .Where(product => product.Field<string>("ProductName").ToLower() == productName.ToLower())
@@ -210,11 +197,7 @@ namespace ClassLibrary
 
             return price;
         }
-        #endregion
 
-        #region Build four methods of your choosing that will classify some data
-
-        // 1 Get Unitprice * unitsInStock by productName
         public decimal GetInventoryValueByProductName(string productName)
         {
             decimal unitPrice = dataLayer.GetProductsTable().AsEnumerable()
@@ -230,13 +213,12 @@ namespace ClassLibrary
             return unitPrice * unitsInStock;
         }
 
-        // 2 Get orderdatebyOrderID
         public DateTime GetOrderDateByOrderID(int orderId)
         {
             DataRow order;
             DateTime orderDate;
 
-            try
+            try 
             {
                 order = dataLayer.GetOrdersTable()
                                   .AsEnumerable()
@@ -253,7 +235,6 @@ namespace ClassLibrary
             return orderDate;
         }
 
-        // 3 get product by orderID
         public DataTable GetProductByOrderID(int orderId)
         {
             int productId;
@@ -275,10 +256,9 @@ namespace ClassLibrary
                 .AsEnumerable()
                 .Where(p => p.Field<long>("ProductID") == productId);
 
-            // convert Enumerable to Datatable
             return query.Count() > 0 ? query.CopyToDataTable() : null;
         }
-        // 4 get orders details by customer id 
+
         public DataTable GetOrdersDetailsByCustomerID(string customerId)
         {
             long orderId;
@@ -300,9 +280,7 @@ namespace ClassLibrary
                 .AsEnumerable()
                 .Where(p => p.Field<int>("OrderId") == orderId);
 
-            // convert Enumerable to Datatable
             return query.Count() > 0 ? query.CopyToDataTable() : null;
         }
-        #endregion
     }
 }
