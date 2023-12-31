@@ -1,7 +1,5 @@
 # WPF Application with LINQ Examples
 
-> __Download the executable [here](https://ruskpr.github.io:3000/projects/sql-linq-queries) and try it out.__
-
 This is a WPF (Windows Presentation Foundation) application that demonstrates the usage of LINQ (Language Integrated Query) in C#. It manipulates SQL data from Microsoft's sample database (Northwind).
 
 LINQ is a powerful query language that provides a unified syntax for querying and manipulating data from different data sources.
